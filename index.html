@@ -5,32 +5,67 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
 
   <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
-  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
   <title>Frontend Mentor | Todo app</title>
 
   <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
   <style>
-    .attribution { font-size: 11px; text-align: center; }
-    .attribution a { color: hsl(228, 45%, 44%); }
+    
+
   </style>
 </head>
 <body>
+  <div class="main-container">
+    <div class="header-container">
+      <h1 class="header">todo</h1>
+      <div class="change-theme"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26"><path fill="#FFF" fill-rule="evenodd" d="M13 0c.81 0 1.603.074 2.373.216C10.593 1.199 7 5.43 7 10.5 7 16.299 11.701 21 17.5 21c2.996 0 5.7-1.255 7.613-3.268C23.22 22.572 18.51 26 13 26 5.82 26 0 20.18 0 13S5.82 0 13 0z"/></svg></div>
+    </div>
+    <div class="new-todo-container">
+        <div class="checkbox-wrapper">
+          <input type="checkbox" id="new-todo-checkbox"  name="inputs" class="custom-checkbox">
+          <label for="new-todo-checkbox"><svg xmlns="http://www.w3.org/2000/svg" width="11" height="9"><path fill="none" stroke="#FFF" stroke-width="2" d="M1 4.304L3.696 7l6-6"/></svg></label>
+        </div>
+        <input class="todo-input" type="text" id="new-todo-text" name="inputs" placeholder="Create a new todo...">
+    </div>
+    <div class="content-container">
+      <div class="new-todo-container text-container">
+        <div class="checkbox-wrapper">
+          <input type="checkbox" id="new-todo-checkbox"  name="inputs" class="custom-checkbox">
+          <label for="new-todo-checkbox"><svg xmlns="http://www.w3.org/2000/svg" width="11" height="9"><path fill="none" stroke="#FFF" stroke-width="2" d="M1 4.304L3.696 7l6-6"/></svg></label>
+        </div>
+        <span class="todo-text">Here your todo will be displayed</span>
+      </div>
+      <div class="footer-container">
+        <ul class="footer-items">
+          <li class="footer-item items-left">3 items left</li>
+          <li class="footer-item all-items">All</li>
+          <li class="footer-item items-active">Active</li>
+          <li class="footer-item items-completed">Completed</li>
+          <li class="footer-item clear-items">Clear Completed</li>
+        </ul>
+        <!-- <div class="footer-item-left">3 items left</div>
+          <div class="footer-all-items">All</div>
+        <div class="footer-active-items">Active</div>
+        <div class="footer-completed-items">Completed</div>
+        <div class="footer-clear">Clear Completed</div> -->
+      </div>
+    </div>
+  </div>
 
-  Todo
 
-  <!-- Add dynamic number --> items left
 
-  All
-  Active 
-  Completed
 
-  Clear Completed
 
-  Drag and drop to reorder list
+ 
+
+
 
   <div class="attribution">
     Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
     Coded by <a href="#">Your Name Here</a>.
   </div>
+  <script src="script.js"></script>
 </body>
 </html>
