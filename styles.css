@@ -66,17 +66,26 @@ body {
     cursor: pointer;
 }
 
-
-.new-todo-container {
-    background-color: white;
-    margin-top: 1em;
-    margin-bottom: 1em;
+.content-container {
+    background: white; 
+    border-radius: 5px; 
+    -webkit-box-shadow: 0px 10px 33px 0px rgba(34, 60, 80, 0.2);
+    -moz-box-shadow: 0px 10px 33px 0px rgba(34, 60, 80, 0.2);
+    box-shadow: 0px 10px 33px 0px rgba(34, 60, 80, 0.2);
+}
+.new-todo-container {  
+    background: white;   /* Пофиксить отступ основного блока с заданиями*/
     display: flex;
     height: 4em;
     align-items: center;
     flex-wrap: nowrap;
     border-radius: 5px;
 }
+
+.new-todo-container {
+    border-top: 1px solid hsl(0, 0%, 90%);
+}
+
 .checkbox-wrapper {
     margin: 1em 0 1em 1em;
     display: flex;
@@ -124,6 +133,10 @@ body {
     display: flex;
     flex-direction: column;
 }
+.todo-text {
+    color: black;
+
+}
 
 .footer-container {
     /* display: inline-flex; */
@@ -160,22 +173,11 @@ body {
 }
 
 
+.attribution { font-size: 11px; text-align: center; }
+.attribution a { color: hsl(228, 45%, 44%); }
 
+/* Custom checkbox */
 
-/* .footer-container > .footer-item-left {
-    flex-basis: ;
-}
-.footer-container > .footer-all-items,
-.footer-container > .footer-active-items,
-.footer-container > .footer-completed-items  {
-    flex-basis: 20%;
-} */
-
-
-
-
-
-/* Custom Checkbox*/
 
 .custom-checkbox {
     position: absolute;
@@ -218,15 +220,3 @@ body {
     background: linear-gradient(160deg, rgba(87,221,255,1) 0%, rgba(192,88,243,1) 100%);
 
 }
-/* .custom-checkbox+label:hover::before {
-    border-color: red;
-}
-.custom-checkbox:focus+label::before {
-    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-}
-.custom-checkbox:disabled+label::before {
-    background-color: blue;
-} */
-
-.attribution { font-size: 11px; text-align: center; }
-.attribution a { color: hsl(228, 45%, 44%); }
