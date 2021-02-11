@@ -73,18 +73,21 @@ body {
     -moz-box-shadow: 0px 10px 33px 0px rgba(34, 60, 80, 0.2);
     box-shadow: 0px 10px 33px 0px rgba(34, 60, 80, 0.2);
 }
+
+.input-container {
+    margin-top: 1em;
+}
 .new-todo-container {  
     background: white;   /* Пофиксить отступ основного блока с заданиями*/
     display: flex;
     height: 4em;
     align-items: center;
+    justify-content: space-between;
     flex-wrap: nowrap;
     border-radius: 5px;
-}
-
-.new-todo-container {
     border-top: 1px solid hsl(0, 0%, 90%);
 }
+
 
 .checkbox-wrapper {
     margin: 1em 0 1em 1em;
@@ -128,49 +131,74 @@ body {
     opacity: 0.9;
 }
 
+.new-todo-container svg.close {
+    padding-right: 0;
+    padding-left: 0;
+    flex-basis: 10%;
+    cursor: pointer;
+    opacity: 0.3;
+}
+
+.new-todo-container svg.close-enable:hover {
+    fill: orange;
+    opacity: 0.9;
+}
+.new-todo-container svg.close-disabled {
+    cursor: default;
+}
+
+
+
 .content-container {
     margin-top: 2em;
     display: flex;
     flex-direction: column;
+    max-height: 500px;
+    overflow:scroll;
 }
 .todo-text {
     color: black;
-
+    flex-basis: 85%;
 }
 
 .footer-container {
-    /* display: inline-flex; */
-    /* justify-content: space-between; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     height: 30px;
     border-top: 1px solid hsl(0, 0%, 90%);
     color: hsl(236, 9%, 61%);
     font-weight: 700;
     font-size: 14px;
-    padding: 5px;
-
+    padding: 10px;
 }
 
-.footer-items {
-    display: inline-flex;
-    justify-content: stretch;
-    margin: 0;
-    padding: 0;
-    text-decoration: none;
+.footer-item:hover, .clear-btn:hover {
+    color: orange;
+}
 
+.items-left {
+    cursor: default;
+}
+.footer-states {
     list-style: none;
-    width: 100%;
+    margin: 0;
 }
-.footer-items li {
-    padding:0 20px;
+.footer-states li {
+    display: inline;
+    margin: 2px;
+    cursor: pointer;
 }
-.footer-items li:first-child {
-    padding-left: 0;
+
+.clear-btn {
+    border: none;
+    text-decoration: none;
+    background: transparent;
+    color: hsl(236, 9%, 61%);
+    font-family: 'Josefin Sans', sans-serif;
+    cursor: pointer;
 }
-.footer-items li:last-child {
-    align-self: flex-end;
-    padding-right: 0;
-    font-size: 12px;
-}
+
 
 
 .attribution { font-size: 11px; text-align: center; }
@@ -220,3 +248,17 @@ body {
     background: linear-gradient(160deg, rgba(87,221,255,1) 0%, rgba(192,88,243,1) 100%);
 
 }
+.custom-checkbox:disabled + label::before {
+    background:lightgray;
+}
+
+.active {
+    color: blue;
+}
+.unselectable {
+    -webkit-touch-callout: none; 
+    -webkit-user-select: none;   
+    -khtml-user-select: none;    
+    -moz-user-select: none;      
+    -ms-user-select: none;       
+  }
