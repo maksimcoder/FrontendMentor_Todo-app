@@ -10,10 +10,10 @@
 'use strict';
 
 const input = document.querySelector('.todo-input');
-let count = 0,
-    todoAmount = 0;
 
-document.querySelector('.items-left').textContent = `${todoAmount} items left`;
+let todoAmount = 0;
+
+countAllTodos();
 
 class TodoConstructor {
     constructor(input, parentSelector) {
@@ -43,9 +43,7 @@ class TodoConstructor {
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" class="close close-enable"><path d="M16.97 0l.708.707L9.546 8.84l8.132 8.132-.707.707-8.132-8.132-8.132 8.132L0 16.97l8.132-8.132L0 .707.707 0 8.84 8.132 16.971 0z"/></svg>
         `;
         this.parent.prepend(newTodo);
-        countAllTodos();
-        
-        
+        countAllTodos();   
     }
 }
 
@@ -81,14 +79,16 @@ function createNewTodo() {
     });
 }
 
+/* 
+Peeked the below function idea from Aayushi Simzia code
+Profile: https://www.frontendmentor.io/profile/iucsim
+Thanks!
+*/
 
-
-
-// Второй способ - правильно считает кол-во задач
 function bindTodoDelete(){
     const deleteBtns = document.getElementsByClassName("close-enable");
     for( let i = 0; i < deleteBtns.length; i++){
-        deleteBtns[i].onclick = () => {
+        deleteBtns[i].onclick = function() {
             const parent = this.parentElement;
             parent.remove();
             --todoAmount;
