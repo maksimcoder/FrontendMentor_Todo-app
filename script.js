@@ -6,8 +6,6 @@
 // - Toggle light and dark mode
 // - **Bonus**: Drag and drop to reorder items on the list
 
-// 1 - Разобраться с удалением задачи
-
 
 'use strict';
 
@@ -78,55 +76,25 @@ function createNewTodo() {
             new TodoConstructor(input, '.content-container').render();
             input.value = '';
             checkForEmptyContent();
-            deleteBtnClick();
-            // bindTodoDelete();
+            bindTodoDelete();
         }
     });
 }
 
 
-// function bindTodoDelete() {
-//     const deleteBtns = document.querySelectorAll('.close-enable');
-//     --todoAmount;
-//     for (let i = 0; 0 < deleteBtns.length; i++) {
-//         deleteBtns[i].addEventListener('click', (e) => {
-//             if (e.target.tagName == 'svg') {
-//                 e.target.parentElement.remove();
-//             } else {
-//                 const parent = e.target.parentElement;
-//                 parent.parentElement.remove();
-//             }
-//         });
-//         countAllTodos();
-//     }
-    
-// }
 
-function deleteBtnClick(){
+
+// Второй способ - правильно считает кол-во задач
+function bindTodoDelete(){
     const deleteBtns = document.getElementsByClassName("close-enable");
-    const deleteBtnss = document.querySelectorAll(".close-enable");
-    var j;
-    deleteBtnss.forEach(item => {
-        item.addEventListener('click', (e) => {
-            const parent = e.target.parentElement;
-            if (e.target.tagName == 'svg') {
-                parent.remove();
-            } else {
-                parent.parentElement.remove();
-            }
+    for( let i = 0; i < deleteBtns.length; i++){
+        deleteBtns[i].onclick = () => {
+            const parent = this.parentElement;
+            parent.remove();
             --todoAmount;
-            console.log(todoAmount);
-            countAllTodos();
-        });
-    });
-    // for( j = 0; j < deleteBtns.length; j++){
-    //     deleteBtns[j].onclick = function() {
-    //         const parent = this.parentElement;
-    //         parent.remove();
-    //         --todoAmount;
-    //         countAllTodos();
-    //     }; 
-    // }
+            countAllTodos(); 
+        };
+    }
 }
 
 function countAllTodos() {
