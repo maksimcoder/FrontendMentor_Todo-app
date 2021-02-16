@@ -109,9 +109,6 @@ checkEmptyInput();
 // Lists Toggle
 
 
-const allBtn = document.querySelector('.all-items'),
-      activeBtn = document.querySelector('.items-active'),
-      completedBtn = document.querySelector('.items-completed');
 
 
 function markAsCompleted() {
@@ -152,7 +149,8 @@ function changeSelectedList() {
 }
 
 function bindListItem(listBtnSelector, shownListSelector, hiddenListSelector = null ) {
-    listBtnSelector.addEventListener('click', () => {
+    const listBtn = document.querySelector(listBtnSelector);
+    listBtn.addEventListener('click', () => {
         document.querySelectorAll(hiddenListSelector).forEach(todo => {
             todo.classList.remove('show');
             todo.classList.add('hide');
@@ -167,7 +165,18 @@ function bindListItem(listBtnSelector, shownListSelector, hiddenListSelector = n
     
 }
 
-bindListItem(completedBtn, '.completed', '.not-completed');
-bindListItem(activeBtn, '.not-completed', '.completed');
-bindListItem(allBtn, '.not-completed');
-bindListItem(allBtn, '.completed');
+function clearCompleted(btnSelector) {
+    const clearBtn = document.querySelector(btnSelector);
+    clearBtn.addEventListener('click', () => {
+        document.querySelectorAll('.completed').forEach(todo => {
+            todo.remove();
+        });
+        countAllTodos();
+    });
+}
+
+bindListItem('.items-completed', '.completed', '.not-completed');
+bindListItem('.items-active', '.not-completed', '.completed');
+bindListItem('.all-items', '.not-completed');
+bindListItem('.all-items', '.completed');
+clearCompleted('.clear-btn');
