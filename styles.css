@@ -199,6 +199,11 @@ body {
     cursor: pointer;
 }
 
+.clear-btn:active,
+.clear-btn:focus {
+    outline: none;
+}
+
 
 
 .attribution { font-size: 11px; text-align: center; }
