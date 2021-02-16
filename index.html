@@ -17,8 +17,6 @@
   </style>
 </head>
 <body>
-  <div class="button" id="btn">click me</div>
-  <div class="button" id="btnn">click me tool</div>
   <div class="main-container">
     <div class="header-container">
       <h1 class="header">todo</h1>
@@ -29,7 +27,7 @@
           <input type="checkbox" id="new-todo-checkbox"  name="inputs" class="custom-checkbox" disabled>
           <label for="new-todo-checkbox"><svg xmlns="http://www.w3.org/2000/svg" width="11" height="9"><path fill="none" stroke="#FFF" stroke-width="2" d="M1 4.304L3.696 7l6-6"/></svg></label>
         </div>
-        <input class="todo-input" type="text" id="new-todo-text" name="inputs" placeholder="Create a new todo...">
+        <input class="todo-input" type="text" id="new-todo-text" name="inputs" placeholder="Create a new todo..." autofocus>
     </div>
     <div class="content-container">
       <div class="new-todo-container text-container">
@@ -47,7 +45,7 @@
       <div class="footer-container">
         <div><span class="items-left"></span></div>
         <ul class="footer-states">
-          <li class="footer-item all-items">All</li>
+          <li class="footer-item all-items active">All</li>
           <li class="footer-item items-active">Active</li>
           <li class="footer-item items-completed">Completed</li>
         </ul>

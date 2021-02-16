@@ -28,12 +28,12 @@ class TodoConstructor {
         }
         
         const newTodo = document.createElement('div');
-        newTodo.classList.add('new-todo-container', 'new-container');
+        newTodo.classList.add('new-todo-container', 'new-container', 'not-completed', 'show');
 
         newTodo.innerHTML = `
             <div class="checkbox-wrapper">
                 <input type="checkbox" id="new-todo-${todoAmount}"  name="inputs" class="custom-checkbox">
-                <label for="new-todo-${todoAmount}">
+                <label for="new-todo-${todoAmount}" class="checkbox-label">
                 <svg xmlns="http://www.w3.org/2000/svg" width="11" height="9">
                     <path fill="none" stroke="#FFF" stroke-width="2" d="M1 4.304L3.696 7l6-6"/>
                 <svg>
@@ -70,20 +70,16 @@ function createNewTodo() {
     input.addEventListener('keydown', (e) => {
         if (e.code === "Enter" && input.value !== '') { 
             ++todoAmount;
-            console.log(todoAmount);
             new TodoConstructor(input, '.content-container').render();
             input.value = '';
             checkForEmptyContent();
             bindTodoDelete();
+            markAsCompleted();
         }
     });
 }
 
-/* 
-Peeked the below function idea from Aayushi Simzia code
-Profile: https://www.frontendmentor.io/profile/iucsim
-Thanks!
-*/
+
 
 function bindTodoDelete(){
     const deleteBtns = document.getElementsByClassName("close-enable");
@@ -95,19 +91,83 @@ function bindTodoDelete(){
             countAllTodos(); 
         };
     }
+    /* 
+        Peeked the function idea from Aayushi Simzia code
+        Profile: https://www.frontendmentor.io/profile/iucsim
+        Thanks!
+    */
 }
 
 function countAllTodos() {
-    document.querySelector('.items-left').textContent = `${todoAmount} items left`;
+    const todoCount = document.querySelectorAll(`.new-container[class~="show"]`);
+    document.querySelector('.items-left').textContent = `${todoCount.length} items left`;
 }
-
-
 
 createNewTodo();
 checkEmptyInput();
 
+// Lists Toggle
 
 
+const allBtn = document.querySelector('.all-items'),
+      activeBtn = document.querySelector('.items-active'),
+      completedBtn = document.querySelector('.items-completed');
 
 
+function markAsCompleted() {
+    const checkboxes = document.querySelectorAll('.checkbox-label');
+    checkboxes.forEach(box => {
+        box.onclick = () => {
+            box.closest('.new-container').classList.toggle('not-completed');
+            box.closest('.new-container').classList.toggle('completed');
+            console.log('toggle Done');   
+        };
+    });
+}
 
+
+function changeSelectedList() {
+    const listBtnsParent = document.querySelector('.footer-states'),
+          listBtns = document.querySelectorAll('.footer-states li');
+    listBtns.forEach(btn => btn.classList.remove('active'));
+    listBtnsParent.addEventListener('click', (e) => {
+        const targetClasses = e.target.classList[1],
+              target = e.target;
+        switch (targetClasses) {
+            case 'all-items':
+                target.classList.add('active');
+                break;
+            case 'items-active':
+                target.classList.add('active');
+                break;
+            case 'items-completed':
+                target.classList.add('active');
+                break;
+            default:
+                console.log('Switch didn`t work');
+                break;
+        }
+    });
+    countAllTodos();
+}
+
+function bindListItem(listBtnSelector, shownListSelector, hiddenListSelector = null ) {
+    listBtnSelector.addEventListener('click', () => {
+        document.querySelectorAll(hiddenListSelector).forEach(todo => {
+            todo.classList.remove('show');
+            todo.classList.add('hide');
+            
+        });
+        document.querySelectorAll(shownListSelector).forEach(todo => {
+            todo.classList.remove('hide');
+            todo.classList.add('show');
+        });
+        changeSelectedList();
+    });
+    
+}
+
+bindListItem(completedBtn, '.completed', '.not-completed');
+bindListItem(activeBtn, '.not-completed', '.completed');
+bindListItem(allBtn, '.not-completed');
+bindListItem(allBtn, '.completed');

@@ -253,7 +253,13 @@ body {
 }
 
 .active {
-    color: blue;
+    color: orange;
+}
+.hide {
+    display: none;
+}
+.show {
+    display: flex;
 }
 .unselectable {
     -webkit-touch-callout: none; 
