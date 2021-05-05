@@ -1,9 +1,10 @@
 // - Add new todos to the list --- DONE
-// - Mark todos as complete --- SEMI
+// - Mark todos as complete --- DONE
 // - Delete todos from the list --- DONE
-// - Filter by all/active/complete todos
-// - Clear all completed todos
+// - Filter by all/active/complete todos --- DONE
+// - Clear all completed todos --- DONE
 // - Toggle light and dark mode
+// - Local Storage db --- DONE
 // - **Bonus**: Drag and drop to reorder items on the list
 
 
@@ -11,16 +12,30 @@
 
 const input = document.querySelector('.todo-input');
 
-let todoAmount = 0;
+let todoAmount = 0,
+    totalRender = 0;
+try {
+    todoAmount = +localStorage.getItem('todoAmount');
+} catch (error) {
+    localStorage.setItem('todoAmount', '0');
+}
+
+
 
 countAllTodos();
 
 class TodoConstructor {
-    constructor(input, parentSelector) {
-        this.value = input.value;
+    constructor(input = null, parentSelector = null) {
+        if (input.tagName != 'INPUT') {
+            this.value = input;
+            console.log(input);
+        } else {
+            this.value = input.value;
+        }
         this.parent = document.querySelector(parentSelector);
     }
 
+    
     
     render() {
         if (document.querySelector('.text-container')) {
@@ -29,11 +44,12 @@ class TodoConstructor {
         
         const newTodo = document.createElement('div');
         newTodo.classList.add('new-todo-container', 'new-container', 'not-completed', 'show');
+        newTodo.setAttribute('data-value', this.value);
 
         newTodo.innerHTML = `
             <div class="checkbox-wrapper">
-                <input type="checkbox" id="new-todo-${todoAmount}"  name="inputs" class="custom-checkbox">
-                <label for="new-todo-${todoAmount}" class="checkbox-label">
+                <input type="checkbox" id="new-todo-${totalRender}"  name="inputs" class="custom-checkbox">
+                <label for="new-todo-${totalRender}" class="checkbox-label">
                 <svg xmlns="http://www.w3.org/2000/svg" width="11" height="9">
                     <path fill="none" stroke="#FFF" stroke-width="2" d="M1 4.304L3.696 7l6-6"/>
                 <svg>
@@ -43,9 +59,11 @@ class TodoConstructor {
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" class="close close-enable"><path d="M16.97 0l.708.707L9.546 8.84l8.132 8.132-.707.707-8.132-8.132-8.132 8.132L0 16.97l8.132-8.132L0 .707.707 0 8.84 8.132 16.971 0z"/></svg>
         `;
         this.parent.prepend(newTodo);
-        countAllTodos();   
+        totalRender++;
+        countAllTodos();
     }
 }
+checkLocalStorage();
 
 function checkEmptyInput() {
     input.addEventListener('input', () => {
@@ -70,7 +88,9 @@ function createNewTodo() {
     input.addEventListener('keydown', (e) => {
         if (e.code === "Enter" && input.value !== '') { 
             ++todoAmount;
+            localStorage.setItem('todoAmount', `${todoAmount}`);
             new TodoConstructor(input, '.content-container').render();
+            localStorage.setItem(`${input.value}`, `${input.value}`);
             input.value = '';
             checkForEmptyContent();
             bindTodoDelete();
@@ -88,6 +108,9 @@ function bindTodoDelete(){
             const parent = this.parentElement;
             parent.remove();
             --todoAmount;
+            localStorage.setItem('todoAmount', `${todoAmount}`);
+            // console.log(this.parentElement.getAttribute('data-value'));
+            localStorage.removeItem(`${this.parentElement.getAttribute('data-value')}`);
             countAllTodos(); 
         };
     }
@@ -105,6 +128,24 @@ function countAllTodos() {
 
 createNewTodo();
 checkEmptyInput();
+
+function checkLocalStorage() {
+    if (localStorage.length) {
+        for (let i = 0; i < localStorage.length; i++) { 
+            if (localStorage.key(i) == 'todoAmount') {
+                continue;
+            } else {
+                todoAmount = +localStorage.getItem('todoAmount');
+                new TodoConstructor(localStorage.key(i), '.content-container').render();
+                markAsCompleted();
+            }
+            
+        }
+        bindTodoDelete();
+    } else {
+        console.log('-');
+    }
+}
 
 // Lists Toggle
 
