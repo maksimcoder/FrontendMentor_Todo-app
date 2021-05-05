@@ -28,7 +28,6 @@
 
 body {
     background-image: url(images/bg-desktop-light.jpg);
-    /* background-color: grey; */
     background-size: 1440px 300px;
     background-repeat: no-repeat;
     font-family: 'Josefin Sans', sans-serif;
@@ -44,8 +43,6 @@ body {
     /* background-color: white; */
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
-    /* align-items: center; */
     flex-wrap: wrap;
 }
 
@@ -206,8 +203,9 @@ body {
 
 
 
-.attribution { font-size: 11px; text-align: center; }
-.attribution a { color: hsl(228, 45%, 44%); }
+.attribution { font-size: 11px; text-align: center;  margin-top: 10px; color: gray;}
+.attribution a { color: hsl(228, 45%, 44%); text-decoration: none;}
+.attribution a:hover {color: orange;}
 
 /* Custom checkbox */
 
