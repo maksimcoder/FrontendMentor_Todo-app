@@ -216,6 +216,20 @@ function clearCompleted(btnSelector) {
     });
 }
 
+// Dark mode
+
+document.querySelector('.change-theme').addEventListener('click', () => {
+    const alertBlock = document.createElement('div');
+    alertBlock.classList.add('alertBlock');
+    alertBlock.textContent = 'Currently unavailable';
+    document.querySelector('.header-container').append(alertBlock);
+    document.querySelector('.change-theme').style.display = 'none';
+    setTimeout(() => {
+        alertBlock.remove();
+        document.querySelector('.change-theme').style.display = '';
+    }, 2500);
+});
+
 bindListItem('.items-completed', '.completed', '.not-completed');
 bindListItem('.items-active', '.not-completed', '.completed');
 bindListItem('.all-items', '.not-completed');

@@ -270,4 +270,11 @@ body {
     -khtml-user-select: none;    
     -moz-user-select: none;      
     -ms-user-select: none;       
-  }
+}
+
+.alertBlock {
+    position: relative;
+    float: right;
+    width: 100px;
+    height: 30px;
+}
