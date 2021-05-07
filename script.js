@@ -211,7 +211,13 @@ function clearCompleted(btnSelector) {
     clearBtn.addEventListener('click', () => {
         document.querySelectorAll('.completed').forEach(todo => {
             todo.remove();
+            if (localStorage.getItem(todo.getAttribute('data-value'))) {
+                localStorage.removeItem(todo.getAttribute('data-value'));
+                todoAmount--;
+                localStorage.setItem('todoAmount', todoAmount);
+            }
         });
+        
         countAllTodos();
     });
 }
